@@ -75,8 +75,15 @@
                                     @endif
                                 </div>
                                 <div class="col-md-12 mb-3">
-                                    <label for="cv" class="form-label">Curriculum Vitae (CV)</label>
-                                    <input type="file" class="form-control" name="cv" id="cv">
+                                    <input type="file" class="form-control @error('cv') is-invalid @enderror" name="cv" id="cv">
+                                    @error('cv')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                    @if ($employee->cv)
+                                        <small class="text-muted">CV already uploaded: <a
+                                                href="{{ asset('storage/' . $employee->cv) }}" target="_blank"
+                                                rel="noopener noreferrer">{{ $employee->cv }}</a></small>
+                                    @endif
                                 </div>
                             </div>
                             <hr>
